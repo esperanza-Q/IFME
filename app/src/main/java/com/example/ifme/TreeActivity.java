@@ -1,582 +1,304 @@
-
 package com.example.ifme;
 
-import android.graphics.PointF;
-import java.util.HashMap;
-import java.util.Map;
-
-
-import android.content.Intent;
-
-
-import android.view.Gravity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import java.util.ArrayList;
-import java.util.List;
-
-
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-
 import android.widget.TextView;
 
-
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
-
-
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
+/**
+ * 트리 화면은 하나의 좌표계를 사용함.
+ * 모든 노드 카드, '+' 버튼, 연결선은 확대 전의 treeContainer 안에 배치하고,
+ * 확대·축소와 이동은 뷰포트에서 컨테이너 전체에 적용함.
+ */
 public class TreeActivity extends AppCompatActivity {
 
+    private ZoomableTreeLayout viewport;
+    private FrameLayout treeContainer;
     private TreeConnectionView treeConnections;
 
-    private View nodeChoice1;
-    private View nodeChoice2;
+    private TreeLayoutManager.Node rootNode;
+    private TreeLayoutManager.Node selectedNode;
+    private TreeLayoutManager.Result lastLayout;
 
-    private LinearLayout plusGroup1;
-    private LinearLayout plusGroup2;
-
-
-    private TreeNode rootNode;
-    private TreeNode choice1Node;
-    private TreeNode choice2Node;
-
-
-    private ConstraintLayout treeContainer;
-
-    private final List<TreeConnectionView.Connection> connections =
-            new ArrayList<>();
-
+    // 형제 노드 중 하나를 선택하면 두 형제 노드 모두의 '+' 버튼을 표시함.
+    // 이 표시 여부는 현재 선택된 노드 정보와 별도로 관리함.
+    private final Set<TreeLayoutManager.Node> expandedPairs =
+            Collections.newSetFromMap(new IdentityHashMap<TreeLayoutManager.Node, Boolean>());
+    private final Map<TreeLayoutManager.Node, View> nodeViews = new IdentityHashMap<>();
     private int newNodeCount = 0;
 
-
-    // 트리 데이터와 화면의 노드를 연결
-    private final Map<TreeNode, View> nodeViews = new HashMap<>();
-
-    // 초기 화면 중앙 정렬 여부
-    private boolean treeCentered = false;
-
-
-
+    private int cardWidth;
+    private int cardHeight;
+    private int rootSize;
+    private int plusSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tree);
 
-
-        rootNode = new TreeNode("root", "me");
-
-        choice1Node = addChild(rootNode, true, "취업하기");
-        choice2Node = addChild(rootNode, false, "대학원 진학하기");
-
-
-        // 1. 노드 연결
-        View nodeMe = findViewById(R.id.nodeMe);
-
-        nodeChoice1 = findViewById(R.id.nodeChoice1);
-        nodeChoice2 = findViewById(R.id.nodeChoice2);
-
-        TextView tvChoice1 = findViewById(R.id.tvChoice1);
-        TextView tvChoice2 = findViewById(R.id.tvChoice2);
-
-        tvChoice1.setText(choice1Node.title);
-        tvChoice2.setText(choice2Node.title);
-
-
+        viewport = findViewById(R.id.zoomableTree);
+        treeContainer = findViewById(R.id.treeContainer);
         treeConnections = findViewById(R.id.treeConnections);
 
-        treeContainer = findViewById(R.id.treeContainer);
+        findViewById(R.id.btnTreeBack).setOnClickListener(v -> finish());
+        TextView worldTitle = findViewById(R.id.tvWorldTitle);
+        String suppliedWorldTitle = getIntent().getStringExtra("worldTitle");
+        worldTitle.setText(suppliedWorldTitle == null ? "세계 제목" : suppliedWorldTitle);
 
+        // 임시 세계 데이터이며, 추후 다른 팀원이 구현한 화면의 데이터로 대체할 예정.
+        String first = getIntent().getStringExtra("choice1");
+        String second = getIntent().getStringExtra("choice2");
+        if (first == null) first = "취업하기";
+        if (second == null) second = "대학원 진학하기";
+        rootNode = new TreeLayoutManager.Node("root", "me");
+        addChild(rootNode, true, first);
+        addChild(rootNode, false, second);
 
-        nodeViews.put(rootNode, nodeMe);
-        nodeViews.put(choice1Node, nodeChoice1);
-        nodeViews.put(choice2Node, nodeChoice2);
-
-
-
-        connections.add(new TreeConnectionView.Connection(
-                nodeMe, nodeChoice1, false
-        ));
-
-        connections.add(new TreeConnectionView.Connection(
-                nodeMe, nodeChoice2, false
-        ));
-
-
-        treeConnections.post(() ->
-                treeConnections.setConnections(connections)
-        );
-
-
-        // 2. 하위 노드 추가 버튼 그룹
-        plusGroup1 = findViewById(R.id.plusGroup1);
-        plusGroup2 = findViewById(R.id.plusGroup2);
-
-        View plus1Left = findViewById(R.id.btnPlus1Left);
-        View plus1Right = findViewById(R.id.btnPlus1Right);
-
-        View plus2Left = findViewById(R.id.btnPlus2Left);
-        View plus2Right = findViewById(R.id.btnPlus2Right);
-
-
-        // 처음에는 + 버튼 숨기기
-        plusGroup1.setVisibility(View.GONE);
-        plusGroup2.setVisibility(View.GONE);
-
-
-        // 선택지 클릭 → 노드 요약 확인
-        nodeChoice1.setOnClickListener(v -> {
-            showNodeSummary(choice1Node.title, 1);
-        });
-
-        nodeChoice2.setOnClickListener(v -> {
-            showNodeSummary(choice2Node.title, 2);
-        });
-
-
-        // 취업하기 - 왼쪽 하위 노드
-        plus1Left.setOnClickListener(v ->
-                createTestNode(choice1Node, true, nodeChoice1, plus1Left)
-        );
-
-        // 취업하기 - 오른쪽 하위 노드
-        plus1Right.setOnClickListener(v ->
-                createTestNode(choice1Node, false, nodeChoice1, plus1Right)
-        );
-
-        // 대학원 진학하기 - 왼쪽 하위 노드
-        plus2Left.setOnClickListener(v ->
-                createTestNode(choice2Node, true, nodeChoice2, plus2Left)
-        );
-
-        // 대학원 진학하기 - 오른쪽 하위 노드
-        plus2Right.setOnClickListener(v ->
-                createTestNode(choice2Node, false, nodeChoice2, plus2Right)
-        );
-
-
-
+        viewport.post(this::renderTree);
     }
 
+    private TreeLayoutManager.Node addChild(
+            TreeLayoutManager.Node parent, boolean isLeft, String title) {
+        if (parent == null || (isLeft ? parent.left != null : parent.right != null)) {
+            return null;
+        }
+        TreeLayoutManager.Node child = new TreeLayoutManager.Node(
+                UUID.randomUUID().toString(), title);
+        child.parent = parent;
+        if (isLeft) parent.left = child;
+        else parent.right = child;
+        return child;
+    }
 
-        // 임시 노드 요약 확인창
-    private void showNodeSummary(String title, int choiceNumber) {
-
-        new androidx.appcompat.app.AlertDialog.Builder(this)
-                .setTitle(title)
+    private void showNodeSummary(TreeLayoutManager.Node node) {
+        new AlertDialog.Builder(this)
+                .setTitle(node.title)
                 .setMessage("노드 요약 카드 화면을 대신하는 테스트입니다.")
-                .setNegativeButton("닫기", (dialog, which) -> {
-                    dialog.dismiss();
-                })
+                .setNegativeButton("닫기", (dialog, which) -> dialog.dismiss())
                 .setPositiveButton("선택하기", (dialog, which) -> {
-                    confirmNodeSelection(choiceNumber);
+                    selectedNode = node;
+                    if (node.parent != null) expandedPairs.add(node.parent);
+                    renderTree();
                 })
                 .show();
     }
 
-
-    // 선택하기를 눌렀을 때 트리에 선택 상태 반영
-    private void confirmNodeSelection(int choiceNumber) {
-
-        View nodeMe = findViewById(R.id.nodeMe);
-
-        View plus1Left = findViewById(R.id.btnPlus1Left);
-        View plus1Right = findViewById(R.id.btnPlus1Right);
-
-        View plus2Left = findViewById(R.id.btnPlus2Left);
-        View plus2Right = findViewById(R.id.btnPlus2Right);
-
-        // 선택 여부와 관계없이 양쪽 + 버튼 표시
-        plusGroup1.setVisibility(View.VISIBLE);
-        plusGroup2.setVisibility(View.VISIBLE);
-
-        // 선택한 노드에 따라 테두리 색상 변경
-        setNodeSelected(nodeMe, true);
-
-        boolean firstSelected = choiceNumber == 1;
-
-        setNodeSelected(nodeChoice1, firstSelected);
-        setNodeSelected(nodeChoice2, !firstSelected);
-
-        // 선택한 경로와 양쪽 + 연결선 갱신
-        plusGroup1.post(() -> {
-
-            if (firstSelected) {
-
-                treeConnections.setSelectedNode(
-                        nodeChoice1,
-                        plus1Left,
-                        plus1Right
-                );
-
-                treeConnections.setOtherPlusButtons(
-                        plus2Left,
-                        plus2Right
-                );
-
-            } else {
-
-                treeConnections.setSelectedNode(
-                        nodeChoice2,
-                        plus2Left,
-                        plus2Right
-                );
-
-                treeConnections.setOtherPlusButtons(
-                        plus1Left,
-                        plus1Right
-                );
-            }
-        });
-    }
-
-
-    //선택한 부모 노드의 제목과 ID를 하위 노드 생성 화면으로 전달
-    private void openNodeCreate(String parentTitle, int parentId) {
-
-        Intent intent = new Intent(
-                TreeActivity.this,
-                NodeCreateActivity.class
-        );
-
-        intent.putExtra("parentNodeTitle", parentTitle);
-        intent.putExtra("parentNodeId", parentId);
-
-        startActivity(intent);
-    }
-    //테두리 색상 변경
-
-    private void setNodeSelected(View node, boolean selected) {
-
-        GradientDrawable background =
-                (GradientDrawable) node.getBackground()
-                        .getConstantState()
-                        .newDrawable()
-                        .mutate();
-
-        int color = Color.parseColor(
-                selected ? "#9A78F5" : "#7682B6"
-        );
-
-        int strokeWidth = (int) (1.5f *
-                getResources().getDisplayMetrics().density);
-
-        background.setStroke(strokeWidth, color);
-
-        node.setBackground(background);
-    }
-
-
-    private static class TreeNode {
-        String id;
-        String title;
-
-        TreeNode parent;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(String id, String title) {
-            this.id = id;
-            this.title = title;
-        }
-    }
-
-
-    private void arrangeTree() {
-
-        int maxDepth = getMaxDepth(rootNode);
-
-        // 초기 트리는 기존 XML 디자인 유지
-        if (maxDepth < 2) return;
-
-        int nodeWidth = dp(120);
-        int horizontalGap = dp(24);
-        int verticalGap = dp(200);
-        int topMargin = dp(100);
-
-        // 실제 트리 깊이에 따라 너비 계산
-        int treeWidth = TreeLayoutManager.calculateWidth(
-                maxDepth,
-                nodeWidth,
-                horizontalGap
-        );
-
-        // 화면 너비보다 작아지지 않도록 설정
-        View zoomableTree = findViewById(R.id.zoomableTree);
-
-        treeWidth = Math.max(
-                treeWidth,
-                zoomableTree.getWidth()
-        );
-
-        // 트리 깊이에 따라 높이도 확장
-        int treeHeight = Math.max(
-                zoomableTree.getHeight(),
-                topMargin + maxDepth * verticalGap + dp(180)
-        );
-
-        ConstraintLayout.LayoutParams params =
-                (ConstraintLayout.LayoutParams)
-                        treeContainer.getLayoutParams();
-
-        params.width = treeWidth;
-        params.height = treeHeight;
-
-        treeContainer.setLayoutParams(params);
-
-        final int finalTreeWidth = treeWidth;
-
-        treeContainer.post(() -> {
-
-            // 모든 노드 위치 다시 계산
-            positionTreeNode(
-                    rootNode,
-                    0,
-                    0,
-                    maxDepth,
-                    nodeWidth,
-                    horizontalGap,
-                    verticalGap,
-                    topMargin
-            );
-
-            // 초기 두 선택지의 + 버튼도 함께 이동
-            positionPlusGroup(nodeChoice1, plusGroup1);
-            positionPlusGroup(nodeChoice2, plusGroup2);
-
-            // 자동 배치를 처음 적용할 때만 가운데 정렬
-            if (!treeCentered) {
-
-                treeContainer.setTranslationX(
-                        (zoomableTree.getWidth()
-                                - finalTreeWidth) / 2f
-                );
-
-                treeCentered = true;
-            }
-
-            // 변경된 위치 기준으로 연결선 다시 그리기
-            treeConnections.invalidate();
-        });
-    }
-
-
-    private void positionTreeNode(
-            TreeNode node,
-            int depth,
-            int index,
-            int maxDepth,
-            int nodeWidth,
-            int horizontalGap,
-            int verticalGap,
-            int topMargin
-    ) {
-        if (node == null) return;
-
-        View nodeView = nodeViews.get(node);
-
-        if (nodeView != null) {
-
-            PointF position = TreeLayoutManager.calculatePosition(
-                    depth,
-                    index,
-                    maxDepth,
-                    nodeWidth,
-                    horizontalGap,
-                    verticalGap,
-                    topMargin
-            );
-
-            // 노드마다 실제 너비가 달라도 중앙 정렬
-            float x = position.x
-                    + (nodeWidth - nodeView.getWidth()) / 2f;
-
-            nodeView.setX(x);
-            nodeView.setY(position.y);
-        }
-
-        // 왼쪽 자식은 index * 2
-        positionTreeNode(
-                node.left,
-                depth + 1,
-                index * 2,
-                maxDepth,
-                nodeWidth,
-                horizontalGap,
-                verticalGap,
-                topMargin
-        );
-
-        // 오른쪽 자식은 index * 2 + 1
-        positionTreeNode(
-                node.right,
-                depth + 1,
-                index * 2 + 1,
-                maxDepth,
-                nodeWidth,
-                horizontalGap,
-                verticalGap,
-                topMargin
-        );
-    }
-
-    private void positionPlusGroup(
-            View parentNode,
-            LinearLayout plusGroup
-    ) {
-        plusGroup.setX(
-                parentNode.getX()
-                        + (parentNode.getWidth()
-                        - plusGroup.getWidth()) / 2f
-        );
-
-        plusGroup.setY(
-                parentNode.getY()
-                        + parentNode.getHeight()
-                        + dp(46)
-        );
-    }
-
-
-    private void createTestNode(
-                TreeNode parent,
-        boolean isLeft,
-        View parentView,
-        View plusButton) {
-            // 이미 자식이 있는 자리라면 추가하지 않음
-            if (isLeft && parent.left != null) return;
-            if (!isLeft && parent.right != null) return;
-
+    private void createTestNode(TreeLayoutManager.Node parent, boolean isLeft) {
+        if (isLeft ? parent.left != null : parent.right != null) return;
+        TreeLayoutManager.Node added = addChild(parent, isLeft,
+                "새 선택지 " + (newNodeCount + 1));
+        if (added != null) {
             newNodeCount++;
-            String title = "새 선택지 " + newNodeCount;
-
-            TreeNode child = addChild(parent, isLeft, title);
-            if (child == null) return;
-
-            // 노드 화면 생성
-            LinearLayout childView = new LinearLayout(this);
-            childView.setVisibility(View.INVISIBLE);
-            childView.setOrientation(LinearLayout.VERTICAL);
-            childView.setGravity(Gravity.CENTER);
-            childView.setBackgroundResource(R.drawable.bg_tree_node);
-
-            TextView titleView = new TextView(this);
-            titleView.setText(child.title);
-            titleView.setTextColor(Color.WHITE);
-            titleView.setTextSize(16);
-            titleView.setGravity(Gravity.CENTER);
-
-            childView.addView(titleView);
-
-            int width = dp(120);
-            int height = dp(93);
-
-            ConstraintLayout.LayoutParams params =
-                    new ConstraintLayout.LayoutParams(width, height);
-
-            params.startToStart = ConstraintLayout.LayoutParams.PARENT_ID;
-            params.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;
-
-            treeContainer.addView(childView, params);
-
-            nodeViews.put(child, childView);
-
-
-            childView.post(() -> {
-
-                int[] plusLocation = new int[2];
-                int[] containerLocation = new int[2];
-
-                plusButton.getLocationInWindow(plusLocation);
-                treeContainer.getLocationInWindow(containerLocation);
-
-                float x = plusLocation[0] - containerLocation[0]
-                        + plusButton.getWidth() / 2f
-                        - childView.getWidth() / 2f;
-
-                float y = plusLocation[1] - containerLocation[1]
-                        + plusButton.getHeight()
-                        + dp(20);
-
-                childView.setX(x);
-                childView.setY(y);
-
-                // 위치 계산이 완료되면 노드를 다시 표시
-                childView.setVisibility(View.VISIBLE);
-
-                // 노드가 보이는 상태에서 연결선 갱신
-                treeConnections.invalidate();
-            });
-
-
-
-
-
-
-        // 사용한 + 버튼은 새 노드로 대체
-            plusButton.setVisibility(View.INVISIBLE);
-
-            // 부모-자식 연결
-            connections.add(new TreeConnectionView.Connection(
-                    parentView,
-                    childView,
-                    false
-            ));
-
-            treeConnections.setConnections(connections);
-
+            // 추후 실제 NodeCreateActivity에서 이름과 상세 정보를 전달받도록 변경할 예정.
+            renderTree();
         }
+    }
 
-// dp를 픽셀로 변환
-        private int dp(float value) {
-            return (int) (
-                    value * getResources().getDisplayMetrics().density + 0.5f
-            );
-        }
+    private void renderTree() {
+        if (viewport.getWidth() <= 0 || viewport.getHeight() <= 0) return;
 
-
-        private TreeNode addChild(
-            TreeNode parent,
-            boolean isLeft,
-            String title) {
-        if (parent == null) return null;
-
-        // 이미 노드가 있는 자리는 추가 불가
-        if (isLeft && parent.left != null) return null;
-        if (!isLeft && parent.right != null) return null;
-
-        TreeNode child = new TreeNode(
-                java.util.UUID.randomUUID().toString(),
-                title
-        );
-
-        child.parent = parent;
-
-        if (isLeft) {
-            parent.left = child;
+        float scale = viewport.getCurrentScale();
+        float previousRootScreenX;
+        float previousRootScreenY;
+        if (lastLayout != null && lastLayout.rootPosition != null) {
+            previousRootScreenX = treeContainer.getTranslationX()
+                    + scale * (lastLayout.rootPosition.x + rootSize / 2f);
+            previousRootScreenY = treeContainer.getTranslationY()
+                    + scale * (lastLayout.rootPosition.y + rootSize / 2f);
         } else {
-            parent.right = child;
+            previousRootScreenX = viewport.getWidth() / 2f;
+            previousRootScreenY = dp(100) + dp(82) / 2f;
         }
 
-        return child;
-    }
+        int vw = viewport.getWidth();
+        // 최초 화면의 간격을 유지하도록 카드 크기를 뷰포트 너비 기준으로 계산함.
+        // 트리 콘텐츠 영역이 넓어지더라도 카드 자체의 너비는 늘어나지 않음.
+        cardWidth = Math.max(dp(100), (vw - dp(72)) / 2);
+        cardHeight = dp(93);
+        rootSize = dp(82);
+        plusSize = dp(46);
 
-    private int getMaxDepth(TreeNode node) {
-        if (node == null) {
-            return -1;
+        TreeLayoutManager.Result layout = TreeLayoutManager.calculate(
+                rootNode, expandedPairs,
+                vw, viewport.getHeight(), cardWidth, cardHeight,
+                rootSize, plusSize,
+                dp(24), dp(100), dp(45), dp(245), dp(46), dp(24));
+
+        // 최종 콘텐츠 좌표에 맞춰 노드 뷰를 다시 생성함.
+        // 배치 후 setX()/setY()로 이동하지 않아 좌측 상단에 잠깐 나타나는 현상을 방지함.
+        treeContainer.removeAllViews();
+        nodeViews.clear();
+        FrameLayout.LayoutParams linesParams = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT);
+        treeContainer.addView(treeConnections, linesParams);
+
+        List<TreeLayoutManager.Node> nodes = new ArrayList<>();
+        collectNodes(rootNode, nodes);
+        for (TreeLayoutManager.Node node : nodes) {
+            TreeLayoutManager.Point p = layout.positions.get(node);
+            if (p == null) continue;
+            View view = buildNodeView(node);
+            int width = node == rootNode ? rootSize : cardWidth;
+            int height = node == rootNode ? rootSize : cardHeight;
+            place(view, Math.round(p.x), Math.round(p.y), width, height);
+            nodeViews.put(node, view);
         }
 
-        int leftDepth = getMaxDepth(node.left);
-        int rightDepth = getMaxDepth(node.right);
+        List<TreeConnectionView.Connection> edges = new ArrayList<>();
+        for (TreeLayoutManager.Node node : nodes) {
+            if (node.parent == null) continue;
+            edges.add(new TreeConnectionView.Connection(
+                    nodeViews.get(node.parent), nodeViews.get(node),
+                    isOnSelectedPath(node), false));
+        }
 
-        return 1 + Math.max(leftDepth, rightDepth);
+        // '+' 버튼 위치도 노드와 동일한 외곽선 계산 결과를 사용함.
+        // 따라서 같은 행에서 버튼과 카드가 겹치지 않도록 배치함.
+        for (TreeLayoutManager.Node node : nodes) {
+            TreeLayoutManager.Slots pair = layout.slots.get(node);
+            if (pair == null) continue;
+            if (pair.left != null) addPlus(node, true, pair.left, edges);
+            if (pair.right != null) addPlus(node, false, pair.right, edges);
+        }
+
+        FrameLayout.LayoutParams containerParams =
+                (FrameLayout.LayoutParams) treeContainer.getLayoutParams();
+        containerParams.width = layout.contentWidth;
+        containerParams.height = layout.contentHeight;
+        treeContainer.setLayoutParams(containerParams);
+
+        // ZoomableTreeLayout의 확대 기준점은 (0,0)임.
+        // 외곽선 배치로 콘텐츠 크기가 바뀌어도 루트 노드의 기존 화면 위치를 유지함.
+        treeContainer.setTranslationX(previousRootScreenX
+                - scale * (layout.rootPosition.x + rootSize / 2f));
+        treeContainer.setTranslationY(previousRootScreenY
+                - scale * (layout.rootPosition.y + rootSize / 2f));
+
+        lastLayout = layout;
+        treeConnections.setConnections(edges);
+        treeConnections.invalidate();
     }
 
+    private View buildNodeView(TreeLayoutManager.Node node) {
+        if (node == rootNode) {
+            TextView root = new TextView(this);
+            root.setText("me");
+            root.setTextColor(Color.WHITE);
+            root.setTextSize(18);
+            root.setTypeface(null, Typeface.BOLD);
+            root.setGravity(Gravity.CENTER);
+            root.setBackgroundResource(R.drawable.bg_tree_me);
+            setOutlineSelected(root, selectedNode != null);
+            return root;
+        }
 
+        LinearLayout card = new LinearLayout(this);
+        card.setOrientation(LinearLayout.VERTICAL);
+        card.setGravity(Gravity.CENTER);
+        card.setBackgroundResource(R.drawable.bg_tree_node);
+        card.setClickable(true);
+        card.setFocusable(true);
+        setOutlineSelected(card, isOnSelectedPath(node));
 
+        TextView label = new TextView(this);
+        label.setText(node.parent.left == node ? "선택지 1" : "선택지 2");
+        label.setTextColor(Color.WHITE);
+        label.setTextSize(14);
+        label.setGravity(Gravity.CENTER);
 
+        TextView title = new TextView(this);
+        title.setText(node.title);
+        title.setTextColor(Color.WHITE);
+        title.setTextSize(16);
+        title.setTypeface(null, Typeface.BOLD);
+        title.setGravity(Gravity.CENTER);
+        title.setMaxLines(2);
 
+        LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        titleParams.topMargin = dp(8);
+        card.addView(label);
+        card.addView(title, titleParams);
+        card.setOnClickListener(v -> showNodeSummary(node));
+        return card;
+    }
+
+    private void addPlus(TreeLayoutManager.Node parent, boolean isLeft,
+                         TreeLayoutManager.Point slotPosition,
+                         List<TreeConnectionView.Connection> edges) {
+        TextView plus = new TextView(this);
+        plus.setText("+");
+        plus.setTextSize(28);
+        plus.setTextColor(Color.WHITE);
+        plus.setGravity(Gravity.CENTER);
+        plus.setBackgroundResource(R.drawable.bg_tree_plus);
+        plus.setContentDescription(isLeft ? "왼쪽 하위 노드 추가" : "오른쪽 하위 노드 추가");
+        plus.setClickable(true);
+        plus.setFocusable(true);
+        setOutlineSelected(plus, isOnSelectedPath(parent));
+        place(plus, Math.round(slotPosition.x), Math.round(slotPosition.y),
+                plusSize, plusSize);
+        plus.setOnClickListener(v -> createTestNode(parent, isLeft));
+        edges.add(new TreeConnectionView.Connection(
+                nodeViews.get(parent), plus, isOnSelectedPath(parent), true));
+    }
+
+    private void place(View view, int x, int y, int width, int height) {
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
+        params.gravity = Gravity.TOP | Gravity.LEFT;
+        params.leftMargin = x;
+        params.topMargin = y;
+        treeContainer.addView(view, params);
+    }
+
+    private boolean isOnSelectedPath(TreeLayoutManager.Node node) {
+        for (TreeLayoutManager.Node cursor = selectedNode;
+             cursor != null; cursor = cursor.parent) {
+            if (cursor == node) return true;
+        }
+        return false;
+    }
+
+    private void collectNodes(TreeLayoutManager.Node node,
+                              List<TreeLayoutManager.Node> list) {
+        if (node == null) return;
+        list.add(node);
+        collectNodes(node.left, list);
+        collectNodes(node.right, list);
+    }
+
+    private void setOutlineSelected(View view, boolean selected) {
+        Drawable background = view.getBackground();
+        if (!(background instanceof GradientDrawable)) return;
+        Drawable.ConstantState state = background.getConstantState();
+        if (state == null) return;
+        GradientDrawable unique = (GradientDrawable) state.newDrawable().mutate();
+        unique.setStroke(dp(1.5f), Color.parseColor(
+                selected ? "#9A78F5" : "#7682B6"));
+        view.setBackground(unique);
+    }
+
+    private int dp(float value) {
+        return (int) (value * getResources().getDisplayMetrics().density + 0.5f);
+    }
 }
