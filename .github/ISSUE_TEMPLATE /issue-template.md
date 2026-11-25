@@ -2,7 +2,7 @@
 name: "🎨 Frontend Issue"
 about: "Android(Java) 화면 및 기능 작업을 위한 이슈 템플릿"
 title: "[FE] "
-labels: ["frontend"]
+labels: "frontend"
 assignees: ""
 ---
 
