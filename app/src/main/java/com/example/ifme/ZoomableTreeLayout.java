@@ -117,6 +117,12 @@ public class ZoomableTreeLayout extends FrameLayout {
                     float dx = event.getX() - lastX;
                     float dy = event.getY() - lastY;
 
+                    //빈 공간에서도 드래그 시작 감지
+                    if (!dragging && Math.hypot(dx, dy) > touchSlop) {
+                        dragging = true;
+                    }
+
+
                     if (dragging) {
                         tree.setTranslationX(
                                 tree.getTranslationX() + dx

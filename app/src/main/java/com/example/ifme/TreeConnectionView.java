@@ -145,6 +145,9 @@ public class TreeConnectionView extends View {
             if (connection.parent == null || connection.child == null) {
                 continue;
             }
+            if (connection.child.getVisibility() != View.VISIBLE) {
+                continue;
+            }
 
             Paint paint = connection.selected
                     ? selectedLinePaint
