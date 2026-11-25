@@ -1,0 +1,252 @@
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#05101D"
+    tools:context=".TreeActivity">
+
+    <!-- 상단 뒤로가기 -->
+    <TextView
+        android:id="@+id/btnTreeBack"
+        android:layout_width="48dp"
+        android:layout_height="64dp"
+        android:gravity="center"
+        android:text="‹"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 세계 제목 -->
+    <TextView
+        android:id="@+id/tvWorldTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:gravity="center"
+        android:text="세계 제목"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!-- 확대 축소 영역 -->
+    <com.example.ifme.ZoomableTreeLayout
+        android:id="@+id/zoomableTree"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintTop_toBottomOf="@id/tvWorldTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+    <!-- 기존 트리 영역 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/treeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+    <!-- 노드 연결선 -->
+        <com.example.ifme.TreeConnectionView
+            android:id="@+id/treeConnections"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- 시작 노드 -->
+        <TextView
+            android:id="@+id/nodeMe"
+            android:layout_width="82dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/bg_tree_me"
+            android:gravity="center"
+            android:text="me"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 선택지 1 -->
+        <LinearLayout
+            android:id="@+id/nodeChoice1"
+            android:layout_width="0dp"
+            android:layout_height="93dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/bg_tree_node"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@id/nodeChoice2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nodeMe">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="선택지 1"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvChoice1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="취업하기"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- 선택지 2 -->
+        <LinearLayout
+            android:id="@+id/nodeChoice2"
+            android:layout_width="0dp"
+            android:layout_height="93dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/bg_tree_node"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/nodeChoice1"
+            app:layout_constraintTop_toTopOf="@id/nodeChoice1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="선택지 2"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvChoice2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="대학원 진학하기"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- 선택지 1의 하위 노드 추가 버튼 -->
+        <LinearLayout
+            android:id="@+id/plusGroup1"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="46dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/nodeChoice1"
+            app:layout_constraintStart_toStartOf="@id/nodeChoice1"
+            app:layout_constraintEnd_toEndOf="@id/nodeChoice1">
+
+            <TextView
+                android:id="@+id/btnPlus1Left"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:background="@drawable/bg_tree_plus"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="첫 번째 하위 노드 추가" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/btnPlus1Right"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:background="@drawable/bg_tree_plus"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="두 번째 하위 노드 추가" />
+
+        </LinearLayout>
+
+        <!-- 선택지 2의 하위 노드 추가 버튼 -->
+        <LinearLayout
+            android:id="@+id/plusGroup2"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="46dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/nodeChoice2"
+            app:layout_constraintStart_toStartOf="@id/nodeChoice2"
+            app:layout_constraintEnd_toEndOf="@id/nodeChoice2">
+
+            <TextView
+                android:id="@+id/btnPlus2Left"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:background="@drawable/bg_tree_plus"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="첫 번째 하위 노드 추가" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/btnPlus2Right"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:background="@drawable/bg_tree_plus"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="두 번째 하위 노드 추가" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.example.ifme.ZoomableTreeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
