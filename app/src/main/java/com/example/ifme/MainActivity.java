@@ -1,5 +1,6 @@
 package com.example.ifme;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
@@ -24,11 +25,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 상단 상태바를 흰색 배경 + 어두운 아이콘으로 맞춤
         getWindow().setStatusBarColor(Color.WHITE);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
-        // 1. 상단 'If : Me' 로고 그라데이션 (#151E43 -> #2F4291) 적용
         TextView tvLogo = findViewById(R.id.tv_home_logo);
         TextPaint paint = tvLogo.getPaint();
         float width = paint.measureText(tvLogo.getText().toString());
@@ -39,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
                 }, null, Shader.TileMode.CLAMP);
         tvLogo.getPaint().setShader(textShader);
 
-        // 2. 메인 질문 중 '갈림길' 부분만 포인트 컬러(#3652C0) 적용
         TextView tvHeadline = findViewById(R.id.tv_home_headline);
         String headlineText = "오늘은 어떤\n갈림길에 서 있나요?";
         SpannableString headlineSpan = new SpannableString(headlineText);
@@ -52,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         );
         tvHeadline.setText(headlineSpan);
 
-        // 3. 서브 설명 문구 중 'If:Me' 부분 Bold 적용
         TextView tvDesc = findViewById(R.id.tv_create_desc);
         String descText = "고민 중인 두 가지 선택지로\nIf:Me와 평행세계를 시작해 보세요!";
         SpannableString descSpan = new SpannableString(descText);
@@ -65,12 +62,12 @@ public class MainActivity extends AppCompatActivity {
         );
         tvDesc.setText(descSpan);
 
-        // 4. '새 세계 만들기' 카드 클릭 이벤트
         LinearLayout cardCreateWorld = findViewById(R.id.card_create_world);
         cardCreateWorld.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "새 세계 만들기 화면을 준비 중입니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, CreateWorldActivity.class);
+                startActivity(intent);
             }
         });
     }
