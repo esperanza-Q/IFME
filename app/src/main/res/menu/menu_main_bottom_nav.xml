@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_world"
+        android:icon="@drawable/ic_nav_world"
+        android:title="월드" />
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_nav_home"
+        android:title="홈" />
+    <item
+        android:id="@+id/nav_my"
+        android:icon="@drawable/ic_nav_my"
+        android:title="마이" />
+</menu>
