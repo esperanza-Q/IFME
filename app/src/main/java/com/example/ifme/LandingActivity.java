@@ -16,7 +16,6 @@ public class LandingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // 이 줄이 반드시 있어야 화면이 그려집니다!
         setContentView(R.layout.activity_landing);
 
         // 4초(4000ms) 후 홈 화면으로 이동
