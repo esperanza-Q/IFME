@@ -23,6 +23,13 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".CreateWorldActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CreateMainNodeActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
