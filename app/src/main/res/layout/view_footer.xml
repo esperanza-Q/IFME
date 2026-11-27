@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:id="@+id/footerWorld"
+        android:layout_width="24dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/footerWorldIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_footer_worlds"
+            android:scaleType="fitCenter"
+            />
+
+        <TextView
+            android:id="@+id/footerWorldText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="월드"
+            android:textSize="12sp"
+            android:fontFamily="@font/pretendard_medium"
+            android:layout_marginTop="5dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/footerHome"
+        android:layout_width="24dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/footerHomeIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_footer_home"
+            android:scaleType="fitCenter"
+            />
+
+        <TextView
+            android:id="@+id/footerHomeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="홈"
+            android:textSize="12sp"
+            android:fontFamily="@font/pretendard_medium"
+            android:layout_marginTop="5dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/footerMypage"
+        android:layout_width="24dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/footerMypageIcon"
+            android:layout_width="19dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_footer_mypage"
+            android:scaleType="fitCenter"
+            />
+
+        <TextView
+            android:id="@+id/footerMypageText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="마이"
+            android:textSize="12sp"
+            android:fontFamily="@font/pretendard_medium"
+            android:layout_marginTop="5dp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
