@@ -1,6 +1,5 @@
 package com.example.ifme;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,7 +15,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -70,7 +68,7 @@ public class MypageActivity extends AppCompatActivity  {
         mypageProfileContent = findViewById(R.id.mypageProfileContent);
 
         ImageButton btnEdit = findViewById(R.id.mypageBtnEdit);
-        btnEdit.setOnClickListener(v -> showEditDialog());
+        btnEdit.setOnClickListener(v -> showEditProfile());
 
     }
 
@@ -90,7 +88,7 @@ public class MypageActivity extends AppCompatActivity  {
                         "기록 히스토리  |  " + profileStorage.getStartDate() + " ~");
     }
 
-    private void showEditDialog() {
+    private void showEditProfile() {
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_profile_edit);
@@ -101,14 +99,14 @@ public class MypageActivity extends AppCompatActivity  {
                     ViewGroup.LayoutParams.WRAP_CONTENT);
         }
 
-        EditText etName = dialog.findViewById(R.id.dialogEditName);
-        EditText etEmail = dialog.findViewById(R.id.dialogEditEmail);
-        Button btnSave = dialog.findViewById(R.id.dialogBtnSave);
+        EditText etName = dialog.findViewById(R.id.profileEditName);
+        EditText etEmail = dialog.findViewById(R.id.profileEditEmail);
+        Button btnProfileSave = dialog.findViewById(R.id.profileBtnSave);
 
         etName.setText(profileStorage.getName());
         etEmail.setText(profileStorage.getEmail());
 
-        btnSave.setOnClickListener(v -> {
+        btnProfileSave.setOnClickListener(v -> {
             profileStorage.saveProfile(
                     etName.getText().toString().trim(),
                     etEmail.getText().toString().trim());

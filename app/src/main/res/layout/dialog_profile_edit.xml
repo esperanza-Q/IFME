@@ -60,7 +60,7 @@
                         android:textSize="15sp" />
 
                     <EditText
-                        android:id="@+id/dialogEditName"
+                        android:id="@+id/profileEditName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="이름을 입력하세요"
@@ -92,7 +92,7 @@
                         android:textSize="15sp" />
 
                     <EditText
-                        android:id="@+id/dialogEditEmail"
+                        android:id="@+id/profileEditEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="이메일을 입력하세요"
@@ -108,7 +108,7 @@
             </TableLayout>
 
             <Button
-                android:id="@+id/dialogBtnSave"
+                android:id="@+id/profileBtnSave"
                 android:layout_width="150dp"
                 android:layout_height="40dp"
                 android:layout_marginBottom="10dp"
