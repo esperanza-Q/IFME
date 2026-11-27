@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/dialogProfileCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_mypage_profile_box"
+            android:paddingStart="30dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="25dp"
+            android:paddingBottom="11dp"
+            app:layout_constraintDimensionRatio="379:234"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center"
+                android:text="회원정보"
+                android:fontFamily="@font/wavvepado_regular"
+                android:textSize="24sp"
+                android:letterSpacing="0.1"
+                android:textColor="@color/purple1" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="6dp"
+                android:stretchColumns="2">
+
+                <TableRow android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="이름"
+                        android:fontFamily="@font/suite_bold"
+                        android:textSize="15sp"
+                        android:letterSpacing="0.05" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="8dp"
+                        android:text="|"
+                        android:fontFamily="@font/suite_bold"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/dialogEditName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="이름을 입력하세요"
+                        android:inputType="textPersonName"
+                        android:maxLines="1"
+                        android:fontFamily="@font/suite_bold"
+                        android:textSize="15sp"
+                        android:letterSpacing="0.05"
+                        android:backgroundTint="@color/purple1" />
+
+                </TableRow>
+
+                <TableRow android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="이메일"
+                        android:fontFamily="@font/suite_bold"
+                        android:textSize="15sp"
+                        android:letterSpacing="0.05" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="8dp"
+                        android:text="|"
+                        android:fontFamily="@font/suite_bold"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:id="@+id/dialogEditEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="이메일을 입력하세요"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:fontFamily="@font/suite_bold"
+                        android:textSize="15sp"
+                        android:letterSpacing="0.05"
+                        android:backgroundTint="@color/purple1" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <Button
+                android:id="@+id/dialogBtnSave"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="bottom|center"
+                android:background="@drawable/bg_mypage_button_round"
+                app:backgroundTint="@null"
+                android:text="저장"
+                android:textColor="@color/white"
+                android:fontFamily="@font/pretendard_bold"
+                android:textSize="15sp" />
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
