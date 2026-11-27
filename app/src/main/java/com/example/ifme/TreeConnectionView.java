@@ -48,7 +48,7 @@ public class TreeConnectionView extends View {
         paint.setColor(color);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeCap(Paint.Cap.ROUND);
-        paint.setStrokeWidth(1.5f * density);
+        paint.setStrokeWidth(3f * density);
         if (dashed) {
             paint.setPathEffect(new DashPathEffect(
                     new float[]{6f * density, 7f * density}, 0));

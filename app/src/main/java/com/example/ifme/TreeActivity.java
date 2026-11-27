@@ -1,5 +1,12 @@
 package com.example.ifme;
 
+
+import android.content.Intent;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+
+
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -49,6 +56,39 @@ public class TreeActivity extends AppCompatActivity {
     private int rootSize;
     private int plusSize;
 
+
+    private TreeLayoutManager.Node pendingParent;
+    private boolean pendingIsLeft;
+
+    private final ActivityResultLauncher<Intent> nodeCreateLauncher =
+            registerForActivityResult(
+                    new ActivityResultContracts.StartActivityForResult(),
+                    result -> {
+                        if (result.getResultCode() != RESULT_OK
+                                || result.getData() == null) {
+                            return;
+                        }
+
+                        Intent data = result.getData();
+                        String title = data.getStringExtra("nodeTitle");
+
+                        if (pendingParent == null || title == null
+                                || title.trim().isEmpty()) {
+                            return;
+                        }
+
+                        TreeLayoutManager.Node added =
+                                addChild(pendingParent, pendingIsLeft, title);
+
+                        if (added != null) {
+                            renderTree();
+                        }
+
+                        pendingParent = null;
+                    }
+            );
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +127,7 @@ public class TreeActivity extends AppCompatActivity {
         else parent.right = child;
         return child;
     }
-
+//다른 팀원 담당 화면을 대체하는 임시팝업 입니다!!
     private void showNodeSummary(TreeLayoutManager.Node node) {
         new AlertDialog.Builder(this)
                 .setTitle(node.title)
@@ -111,6 +151,25 @@ public class TreeActivity extends AppCompatActivity {
             renderTree();
         }
     }
+
+
+    private void openNodeCreate(TreeLayoutManager.Node parent, boolean isLeft) {
+        if (parent == null) return;
+
+        // 이미 하위 노드가 존재하면 생성 화면을 열지 않음.
+        if (isLeft ? parent.left != null : parent.right != null) return;
+
+        // 생성할 노드의 부모와 방향을 기억함.
+        pendingParent = parent;
+        pendingIsLeft = isLeft;
+
+        Intent intent = new Intent(this, NodeCreateActivity.class);
+        intent.putExtra("parentNodeTitle", parent.title);
+        intent.putExtra("parentNodeId", parent.id);
+
+        nodeCreateLauncher.launch(intent);
+    }
+
 
     private void renderTree() {
         if (viewport.getWidth() <= 0 || viewport.getHeight() <= 0) return;
@@ -218,17 +277,19 @@ public class TreeActivity extends AppCompatActivity {
         card.setClickable(true);
         card.setFocusable(true);
         setOutlineSelected(card, isOnSelectedPath(node));
+        boolean dimmed = selectedNode != null && !isOnSelectedPath(node);
+        int nodeTextColor = Color.parseColor(dimmed ? "#D1D1D1" : "#FFFFFF");
 
         TextView label = new TextView(this);
         label.setText(node.parent.left == node ? "선택지 1" : "선택지 2");
-        label.setTextColor(Color.WHITE);
+        label.setTextColor(nodeTextColor);
         label.setTextSize(14);
         label.setGravity(Gravity.CENTER);
 
         TextView title = new TextView(this);
         title.setText(node.title);
-        title.setTextColor(Color.WHITE);
-        title.setTextSize(16);
+        title.setTextColor(nodeTextColor);
+        title.setTextSize(18);
         title.setTypeface(null, Typeface.BOLD);
         title.setGravity(Gravity.CENTER);
         title.setMaxLines(2);
@@ -255,10 +316,9 @@ public class TreeActivity extends AppCompatActivity {
         plus.setContentDescription(isLeft ? "왼쪽 하위 노드 추가" : "오른쪽 하위 노드 추가");
         plus.setClickable(true);
         plus.setFocusable(true);
-        setOutlineSelected(plus, isOnSelectedPath(parent));
         place(plus, Math.round(slotPosition.x), Math.round(slotPosition.y),
                 plusSize, plusSize);
-        plus.setOnClickListener(v -> createTestNode(parent, isLeft));
+        plus.setOnClickListener(v -> openNodeCreate(parent, isLeft));
         edges.add(new TreeConnectionView.Connection(
                 nodeViews.get(parent), plus, isOnSelectedPath(parent), true));
     }
@@ -287,16 +347,31 @@ public class TreeActivity extends AppCompatActivity {
         collectNodes(node.right, list);
     }
 
+
     private void setOutlineSelected(View view, boolean selected) {
         Drawable background = view.getBackground();
-        if (!(background instanceof GradientDrawable)) return;
+
+        if (!(background instanceof GradientDrawable)) {
+            return;
+        }
+
         Drawable.ConstantState state = background.getConstantState();
-        if (state == null) return;
-        GradientDrawable unique = (GradientDrawable) state.newDrawable().mutate();
-        unique.setStroke(dp(1.5f), Color.parseColor(
-                selected ? "#9A78F5" : "#7682B6"));
+
+        if (state == null) {
+            return;
+        }
+
+        GradientDrawable unique =
+                (GradientDrawable) state.newDrawable().mutate();
+
+        unique.setStroke(
+                dp(2),
+                Color.parseColor(selected ? "#A77CFF" : "#7682B6")
+        );
+
         view.setBackground(unique);
     }
+
 
     private int dp(float value) {
         return (int) (value * getResources().getDisplayMetrics().density + 0.5f);
