@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 비교하기 화면에서 반복되는 글자 스타일 -->
+<resources>
+
+    <!-- 벤다이어그램 가치 글자: 한 구역에 최대 3줄 -->
+    <style name="CompareVennText">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#E3E5FF</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:fontFamily">@font/suite_semibold</item>
+        <item name="android:lineSpacingExtra">8dp</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <!-- 범례 글자 -->
+    <style name="CompareLegendText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">6dp</item>
+        <item name="android:textColor">#E3E5FF</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/pretendard_semibold</item>
+    </style>
+
+</resources>
