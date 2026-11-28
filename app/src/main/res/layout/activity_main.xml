@@ -20,6 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingHorizontal="26dp"
             android:paddingTop="32dp"
@@ -55,12 +57,12 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/bg_home_create_card"
                 android:clickable="true"
-                android:elevation="4dp"
                 android:focusable="true"
                 android:gravity="center_vertical"
+                android:minHeight="108dp"
                 android:orientation="horizontal"
                 android:paddingHorizontal="18dp"
-                android:paddingVertical="20dp">
+                android:paddingVertical="18dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -88,29 +90,33 @@
                         android:textSize="13sp" />
                 </LinearLayout>
 
-                <!-- 보라색 원형 + 버튼 -->
-                <ImageView
+                <!-- 보라색 원형 + 버튼 (54dp × 54dp) -->
+                <TextView
                     android:id="@+id/btn_create_plus"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="12dp"
                     android:background="@drawable/bg_home_plus_btn"
                     android:contentDescription="새 세계 만들기"
                     android:elevation="4dp"
-                    android:padding="12dp"
-                    android:src="@drawable/ic_plus" />
+                    android:fontFamily="@font/suite_medium"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="40sp" />
             </LinearLayout>
 
-            <!-- 최근 나의 세계 섹션 타이틀 (Gumi Industry) -->
+            <!-- 최근 나의 세계 섹션 타이틀 -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="34dp"
-                android:fontFamily="@font/gumi_industry"
+                android:fontFamily="@font/wavve_pado"
                 android:text="최근 나의 세계"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
 
             <!-- 최근 세계 카드 1 -->
             <LinearLayout
@@ -118,10 +124,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 android:background="@drawable/bg_home_world_card"
-                android:elevation="3dp"
+                android:elevation="6dp"
+                android:gravity="center_vertical"
+                android:minHeight="114dp"
                 android:orientation="vertical"
+                android:outlineAmbientShadowColor="#40000000"
+                android:outlineSpotShadowColor="#40000000"
                 android:paddingHorizontal="18dp"
-                android:paddingVertical="16dp">
+                android:paddingTop="16dp"
+                android:paddingBottom="22dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -133,7 +144,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/pretendard_bold"
+                        android:fontFamily="@font/pretendard_semibold"
                         android:text="내 미래 세계"
                         android:textColor="#000000"
                         android:textSize="16sp" />
@@ -141,9 +152,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/pretendard_regular"
+                        android:fontFamily="@font/pretendard_semibold"
                         android:text="2026.XX.XX"
-                        android:textColor="#BDBDBD"
+                        android:textColor="#C5C8CE"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -153,8 +164,8 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/suite_regular"
                     android:text="대학원 가기 vs 취업 하기"
-                    android:textColor="#555555"
-                    android:textSize="13sp" />
+                    android:textColor="#4E5660"
+                    android:textSize="12sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -165,9 +176,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/pretendard_regular"
+                        android:fontFamily="@font/pretendard_semibold"
                         android:text="노드 수 · "
-                        android:textColor="#767676"
+                        android:textColor="#6E757D"
                         android:textSize="13sp" />
 
                     <TextView
@@ -176,7 +187,7 @@
                         android:fontFamily="@font/pretendard_bold"
                         android:text="k개"
                         android:textColor="#4460D1"
-                        android:textSize="13sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -184,12 +195,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/bg_home_world_card"
-                android:elevation="3dp"
+                android:elevation="6dp"
+                android:gravity="center_vertical"
+                android:minHeight="114dp"
                 android:orientation="vertical"
+                android:outlineAmbientShadowColor="#40000000"
+                android:outlineSpotShadowColor="#40000000"
                 android:paddingHorizontal="18dp"
-                android:paddingVertical="16dp">
+                android:paddingTop="16dp"
+                android:paddingBottom="22dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -201,7 +217,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/pretendard_bold"
+                        android:fontFamily="@font/pretendard_semibold"
                         android:text="내 미래 세계"
                         android:textColor="#000000"
                         android:textSize="16sp" />
@@ -209,9 +225,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/pretendard_regular"
+                        android:fontFamily="@font/pretendard_semibold"
                         android:text="2026.XX.XX"
-                        android:textColor="#BDBDBD"
+                        android:textColor="#C5C8CE"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -221,8 +237,8 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/suite_regular"
                     android:text="대학원 가기 vs 취업 하기"
-                    android:textColor="#555555"
-                    android:textSize="13sp" />
+                    android:textColor="#4E5660"
+                    android:textSize="12sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -233,9 +249,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/pretendard_regular"
+                        android:fontFamily="@font/pretendard_semibold"
                         android:text="노드 수 · "
-                        android:textColor="#767676"
+                        android:textColor="#6E757D"
                         android:textSize="13sp" />
 
                     <TextView
@@ -244,7 +260,7 @@
                         android:fontFamily="@font/pretendard_bold"
                         android:text="k개"
                         android:textColor="#4460D1"
-                        android:textSize="13sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -252,12 +268,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/bg_home_world_card"
-                android:elevation="3dp"
+                android:elevation="6dp"
+                android:gravity="center_vertical"
+                android:minHeight="114dp"
                 android:orientation="vertical"
+                android:outlineAmbientShadowColor="#40000000"
+                android:outlineSpotShadowColor="#40000000"
                 android:paddingHorizontal="18dp"
-                android:paddingVertical="16dp">
+                android:paddingTop="16dp"
+                android:paddingBottom="22dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -269,7 +290,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/pretendard_bold"
+                        android:fontFamily="@font/pretendard_semibold"
                         android:text="내 미래 세계"
                         android:textColor="#000000"
                         android:textSize="16sp" />
@@ -277,9 +298,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/pretendard_regular"
+                        android:fontFamily="@font/pretendard_semibold"
                         android:text="2026.XX.XX"
-                        android:textColor="#BDBDBD"
+                        android:textColor="#C5C8CE"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -289,8 +310,8 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/suite_regular"
                     android:text="대학원 가기 vs 취업 하기"
-                    android:textColor="#555555"
-                    android:textSize="13sp" />
+                    android:textColor="#4E5660"
+                    android:textSize="12sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -301,9 +322,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/pretendard_regular"
+                        android:fontFamily="@font/pretendard_semibold"
                         android:text="노드 수 · "
-                        android:textColor="#767676"
+                        android:textColor="#6E757D"
                         android:textSize="13sp" />
 
                     <TextView
@@ -312,7 +333,7 @@
                         android:fontFamily="@font/pretendard_bold"
                         android:text="k개"
                         android:textColor="#4460D1"
-                        android:textSize="13sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
 
