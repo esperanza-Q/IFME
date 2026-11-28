@@ -1,9 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <solid android:color="#E2E6F9" />
-    <corners android:radius="50dp" />
-    <stroke
-        android:width="1dp"
-        android:color="#4460D1" />
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 안쪽 그림자 베이스 -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="50dp" />
+            <solid android:color="#B6BBD0" />
+        </shape>
+    </item>
+
+    <!-- 메인 채우기 (#D6DCF5, 상단 3dp 내려서 안쪽 그림자 표현) -->
+    <item
+        android:bottom="1dp"
+        android:left="1dp"
+        android:right="1dp"
+        android:top="3dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="50dp" />
+            <solid android:color="#D6DCF5" />
+        </shape>
+    </item>
+
+    <!-- 외곽선 (#4460D1, 1dp) -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="50dp" />
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="1dp"
+                android:color="#4460D1" />
+        </shape>
+    </item>
+
+</layer-list>

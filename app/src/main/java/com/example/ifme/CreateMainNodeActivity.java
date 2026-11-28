@@ -81,6 +81,9 @@ public class CreateMainNodeActivity extends AppCompatActivity {
         setupSeekBar();
         setupListeners();
         renderStep(1, false);
+
+        // 공통 하단 네비게이션 바 (월드 탭 활성화)
+        FooterHelper.setup(this, FooterHelper.TAB_WORLD);
     }
 
     private void readIntentData() {
@@ -100,7 +103,7 @@ public class CreateMainNodeActivity extends AppCompatActivity {
         View rootLayout = findViewById(R.id.root_create_main_node);
         ViewCompat.setOnApplyWindowInsetsListener(rootLayout, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
     }
@@ -226,7 +229,8 @@ public class CreateMainNodeActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     chipHeightPx
             );
-            chipParams.setMarginEnd(marginEndPx);            chip.setLayoutParams(chipParams);
+            chipParams.setMarginEnd(marginEndPx);
+            chip.setLayoutParams(chipParams);
             chip.setMinimumWidth(dpToPx(59));
             chip.setPadding(padHorizontalPx, 0, padHorizontalPx, 0);
             chip.setGravity(Gravity.CENTER);
@@ -311,14 +315,6 @@ public class CreateMainNodeActivity extends AppCompatActivity {
         });
 
         btnMainNodeNext.setOnClickListener(v -> handleNextButtonClick());
-
-        LinearLayout navHome = findViewById(R.id.nav_home);
-        navHome.setOnClickListener(v -> moveToHome());
-
-        LinearLayout navMy = findViewById(R.id.nav_my);
-        navMy.setOnClickListener(v ->
-                Toast.makeText(CreateMainNodeActivity.this, "마이 화면은 준비 중입니다.", Toast.LENGTH_SHORT).show()
-        );
     }
 
     private void handleBackNavigation() {
@@ -398,7 +394,7 @@ public class CreateMainNodeActivity extends AppCompatActivity {
         etCustomValue.setText("");
 
         if (step == 1) {
-            progressStep3.setBackgroundColor(Color.parseColor("#E8EAF2"));
+            progressStep3.setBackgroundResource(R.drawable.bg_progress_step_inactive);
             tvChoiceHeader.setText("선택지 1. " + choice1);
 
             etExpect.setHint("ex) 실무 경험과 포트폴리오를 쌓고, 첫 월급으로 경제적으로 독립하고 싶어요.\n같이 일하는 선배들에게 배우면서 개발자로서 빠르게 성장할 수 있을 것 같아요.");
@@ -418,7 +414,7 @@ public class CreateMainNodeActivity extends AppCompatActivity {
 
             btnMainNodeNext.setText("선택지 2로 넘어가기");
         } else {
-            progressStep3.setBackgroundColor(Color.parseColor("#5363BE"));
+            progressStep3.setBackgroundResource(R.drawable.bg_progress_step_active);
             tvChoiceHeader.setText("선택지 2. " + choice2);
 
             etExpect.setHint("ex) 교수님과 연구실 동료들에게 배우면서 전문성을 쌓고, 논문을 한편이라도 완성해 보고 싶어요. 졸업할 때는 한 분야에서 \"이건 내가 잘 안다\"고 말할 수 있게 되길 기대해요.");
