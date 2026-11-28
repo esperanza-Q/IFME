@@ -10,6 +10,7 @@
         android:orientation="vertical"
         android:padding="18dp">
 
+        <!-- "제 1 분기점" + 상태 칩 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,11 +20,28 @@
             android:paddingStart="20dp">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="제"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
                 android:id="@+id/tv_branch_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="1"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:layout_weight="1"
-                android:text="제 1 분기점"
+                android:text="분기점"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp" />
 
@@ -38,9 +56,11 @@
                 android:paddingBottom="4dp"
                 android:text="선택 전"
                 android:textColor="#FFFFFF"
-                android:textSize="11sp" />
+                android:textSize="11sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
+        <!-- 선택지 제목 -->
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
@@ -52,6 +72,7 @@
             android:textSize="28sp"
             android:textStyle="bold" />
 
+        <!-- 안쪽 반투명 박스 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -61,17 +82,22 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                style="@style/NodeLabelChip"
-                android:text="중요하게 생각하는 가치" />
+            <!-- 중요하게 생각하는 가치 -->
+            <TextView style="@style/NodeLabelChip" android:text="중요하게 생각하는 가치" />
 
             <LinearLayout
-                android:id="@+id/layout_values"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:orientation="horizontal" />
+                android:orientation="horizontal"
+                android:paddingStart="10dp">
 
+                <TextView android:id="@+id/tv_value1" style="@style/NodeValueChip" />
+                <TextView android:id="@+id/tv_value2" style="@style/NodeValueChip" />
+                <TextView android:id="@+id/tv_value3" style="@style/NodeValueChip" />
+            </LinearLayout>
+
+            <!-- 기대하는 점 -->
             <TextView
                 style="@style/NodeLabelChip"
                 android:layout_marginTop="10dp"
@@ -83,9 +109,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <TextView
-                style="@style/NodeLabelChip"
-                android:text="걱정하는 점" />
+            <!-- 걱정하는 점 -->
+            <TextView style="@style/NodeLabelChip" android:text="걱정하는 점" />
 
             <TextView
                 android:id="@+id/tv_worry"
@@ -93,9 +118,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <TextView
-                style="@style/NodeLabelChip"
-                android:text="포기해야할 것" />
+            <!-- 포기해야할 것 -->
+            <TextView style="@style/NodeLabelChip" android:text="포기해야할 것" />
 
             <TextView
                 android:id="@+id/tv_give_up"
@@ -103,15 +127,14 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
+            <!-- 예상 만족도 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
-                    style="@style/NodeLabelChip"
-                    android:text="예상 만족도" />
+                <TextView style="@style/NodeLabelChip" android:text="예상 만족도" />
 
                 <TextView
                     android:id="@+id/tv_satisfaction"

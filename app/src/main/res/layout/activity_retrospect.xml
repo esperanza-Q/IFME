@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#070C16"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:theme="@style/NodeScreenTheme"
+    tools:context=".RetrospectActivity">
+
+    <!-- 헤더 -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:layout_marginTop="20dp">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="뒤로 가기"
+            android:src="@drawable/ic_node_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="회고 작성"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <!-- 아래로 스크롤 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="32dp">
+
+            <!-- 제목: 흰 세로줄 + VS 제목 + 선택 노드 제목 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_vs_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="노드1 제목 VS 노드2 제목"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_node_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="선택 노드 제목"
+                        android:textColor="#FFFFFF"
+                        android:textSize="26sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- STEP 1 -->
+            <TextView style="@style/RetroStepTitle" android:text="STEP 1  실제로 얻은 가치" />
+            <TextView style="@style/RetroStepDesc" android:text="이 선택을 함으로써 얻게된 가치를 적어주세요. (최대 3개)" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal">
+
+                <TextView android:id="@+id/chip1" style="@style/RetroChip" android:text="안정" />
+                <TextView android:id="@+id/chip2" style="@style/RetroChip" android:text="성장" />
+                <TextView android:id="@+id/chip3" style="@style/RetroChip" android:text="전문성" />
+                <TextView android:id="@+id/chip4" style="@style/RetroChip" android:text="도전" />
+                <TextView android:id="@+id/chip5" style="@style/RetroChip" android:text="인정" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView android:id="@+id/chip6" style="@style/RetroChip" android:text="자유" />
+                <TextView android:id="@+id/chip7" style="@style/RetroChip" android:text="관계" />
+                <TextView android:id="@+id/chip8" style="@style/RetroChip" android:text="여유" />
+                <TextView android:id="@+id/chip9" style="@style/RetroChip" android:text="의미" />
+                <TextView android:id="@+id/chip10" style="@style/RetroChip" android:text="기타" />
+            </LinearLayout>
+            <!-- 기타를 누르면 보이는 직접 입력 칸 -->
+            <LinearLayout
+                android:id="@+id/layout_custom_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/et_custom_value"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_retro_custom_input"
+                    android:hint="가치를 입력해주세요"
+                    android:inputType="text"
+                    android:maxLength="10"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#6B7280"
+                    android:textSize="13sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_add_value"
+                    android:layout_width="64dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_retro_btn_add"
+                    android:stateListAnimator="@null"
+                    android:text="추가"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- STEP 2 -->
+            <TextView style="@style/RetroStepTitle" android:text="STEP 2  실제로 얻은 것" />
+            <TextView style="@style/RetroStepDesc" android:text="이 선택으로 하여금 실제로 무엇을 얻었는지 적어주세요." />
+
+            <LinearLayout style="@style/RetroPastCard">
+                <TextView style="@style/RetroPastLabel" android:text="과거 답변" />
+                <TextView android:id="@+id/tv_past_gain" style="@style/RetroPastText" />
+                <TextView android:id="@+id/tv_more_gain" style="@style/RetroMoreButton" />
+            </LinearLayout>
+
+            <EditText android:id="@+id/et_gain" style="@style/RetroInput" />
+
+            <!-- STEP 3 -->
+            <TextView style="@style/RetroStepTitle" android:text="STEP 3  실제로 겪은 어려움" />
+            <TextView style="@style/RetroStepDesc" android:text="예상했던 어려움과 실제로 겪었던 문제를 적어주세요." />
+
+            <LinearLayout style="@style/RetroPastCard">
+                <TextView style="@style/RetroPastLabel" android:text="과거 답변" />
+                <TextView android:id="@+id/tv_past_hardship" style="@style/RetroPastText" />
+                <TextView android:id="@+id/tv_more_hardship" style="@style/RetroMoreButton" />
+            </LinearLayout>
+
+            <EditText android:id="@+id/et_hardship" style="@style/RetroInput" />
+
+            <!-- STEP 4 -->
+            <TextView style="@style/RetroStepTitle" android:text="STEP 4  포기하거나 잃은 것" />
+            <TextView style="@style/RetroStepDesc" android:text="이 선택으로 인해 포기하거나 놓치게 된 것을 적어주세요." />
+
+            <LinearLayout style="@style/RetroPastCard">
+                <TextView style="@style/RetroPastLabel" android:text="과거 답변" />
+                <TextView android:id="@+id/tv_past_loss" style="@style/RetroPastText" />
+                <TextView android:id="@+id/tv_more_loss" style="@style/RetroMoreButton" />
+            </LinearLayout>
+
+            <EditText android:id="@+id/et_loss" style="@style/RetroInput" />
+
+            <!-- STEP 5 -->
+            <TextView style="@style/RetroStepTitle" android:text="STEP 5  선택 후 만족도" />
+            <TextView style="@style/RetroStepDesc" android:text="현재 이 선택에 얼마나 만족하는지 선택해주세요." />
+
+            <SeekBar
+                android:id="@+id/sb_satisfaction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:max="10"
+                android:progress="7"
+                android:progressBackgroundTint="#FFFFFF"
+                android:progressTint="#5B7BFF"
+                android:thumbTint="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/tv_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
+                android:text="Lv.7"
+                android:textColor="#5B7BFF"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <!-- 작성 완료 (맨 아래) -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_done"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="48dp"
+                android:background="@drawable/bg_retro_btn_done"
+                android:stateListAnimator="@null"
+                android:text="작성 완료"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
