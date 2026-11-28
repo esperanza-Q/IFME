@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 선택된 탭 배경: 왼쪽 보라색에서 오른쪽 어두운 남색으로 (색은 추정값) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="0"
+        android:startColor="#5C63D9"
+        android:endColor="#25275F" />
+    <corners android:radius="12dp" />
+</shape>
