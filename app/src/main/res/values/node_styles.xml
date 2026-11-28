@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- 내 화면 공통: Pretendard 폰트 -->
+    <style name="NodeScreenTheme" parent="">
+        <item name="android:fontFamily">@font/node_pretendard</item>
+        <item name="fontFamily">@font/node_pretendard</item>
+    </style>
+
+    <!-- ===== 노드 카드 ===== -->
+    <!-- 흰색 라벨 ("중요하게 생각하는 가치" 등) -->
     <style name="NodeLabelChip">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -10,14 +18,119 @@
         <item name="android:paddingBottom">3dp</item>
         <item name="android:textColor">#3442C8</item>
         <item name="android:textSize">12sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/suite_bold</item>
+        <item name="fontFamily">@font/suite_bold</item>
     </style>
 
+    <!-- 남색 가치 칩 ("안정", "성장" 등) -->
+    <style name="NodeValueChip">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">6dp</item>
+        <item name="android:background">@drawable/bg_node_value_chip</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/suite_bold</item>
+        <item name="fontFamily">@font/suite_bold</item>
+    </style>
+
+    <!-- 라벨 아래 내용 글씨 -->
     <style name="NodeBodyText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_marginTop">6dp</item>
+        <item name="android:paddingStart">8dp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:lineSpacingExtra">2dp</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <!-- ===== 회고 작성 ===== -->
+    <style name="RetroStepTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">36dp</item>
+        <item name="android:textColor">#5B7BFF</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RetroStepDesc">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="RetroChip">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">34dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginStart">3dp</item>
+        <item name="android:layout_marginEnd">3dp</item>
+        <item name="android:background">@drawable/bg_retro_chip_off</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/suite_medium</item>
+        <item name="fontFamily">@font/suite_medium</item>
+    </style>
+
+    <style name="RetroPastCard">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">14dp</item>
+        <item name="android:background">@drawable/bg_retro_past_card</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">14dp</item>
+    </style>
+
+    <style name="RetroPastLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#8A8A8A</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="RetroPastText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textColor">#111111</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="RetroMoreButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:text">...더보기</item>
+        <item name="android:textColor">#5B7BFF</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RetroInput">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">120dp</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:background">@drawable/bg_retro_input</item>
+        <item name="android:gravity">top|start</item>
+        <item name="android:hint">예시 텍스트</item>
+        <item name="android:textColorHint">#6B7280</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:padding">14dp</item>
+        <item name="android:inputType">textMultiLine</item>
     </style>
 </resources>

@@ -38,6 +38,11 @@
             android:exported="false" />
 
         <activity
+            android:name=".RetrospectActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
             android:name=".MypageActivity"
             android:exported="false" />
 
