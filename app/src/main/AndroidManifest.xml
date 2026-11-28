@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IFME">
+
         <activity
             android:name=".LandingActivity"
             android:exported="true">
@@ -27,15 +28,42 @@
         <activity
             android:name=".CreateWorldActivity"
             android:exported="false" />
+
         <activity
             android:name=".CreateMainNodeActivity"
             android:exported="false" />
-        <activity android:name=".NodeSelectActivity" android:exported="false" />
-        <activity android:name=".RetrospectActivity" android:exported="false" android:windowSoftInputMode="adjustResize" />
 
-        <activity android:name=".MypageActivity" android:exported="false" />
-        <activity android:name=".ReportActivity" android:exported="false" />
-        <activity android:name=".CompareActivity" android:exported="false" />
+        <activity
+            android:name=".NodeSelectActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".RetrospectActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".MypageActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ReportActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".CompareActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".TreeActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".NodeCreateActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 </manifest>
