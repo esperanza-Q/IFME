@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <!-- 상단 및 중앙 스크롤 영역 -->
     <ScrollView
@@ -315,90 +319,11 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- 하단 네비게이션 바 -->
-    <LinearLayout
+    <!-- 공통 하단 네비게이션 바 -->
+    <include
+        android:id="@+id/mypageFooter"
+        layout="@layout/view_footer"
         android:layout_width="match_parent"
-        android:layout_height="74dp"
-        android:background="#FFFFFF"
-        android:elevation="8dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingBottom="10dp">
-
-        <!-- 월드 탭 -->
-        <LinearLayout
-            android:id="@+id/tab_world"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="월드"
-                android:src="@drawable/ic_nav_world" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/pretendard_regular"
-                android:text="월드"
-                android:textColor="#BDBDBD"
-                android:textSize="11sp" />
-        </LinearLayout>
-
-        <!-- 홈 탭 (활성화) -->
-        <LinearLayout
-            android:id="@+id/tab_home"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="홈"
-                android:src="@drawable/ic_nav_home" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/pretendard_bold"
-                android:text="홈"
-                android:textColor="#4460D1"
-                android:textSize="11sp" />
-        </LinearLayout>
-
-        <!-- 마이 탭 -->
-        <LinearLayout
-            android:id="@+id/tab_my"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="마이"
-                android:src="@drawable/ic_nav_my" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/pretendard_regular"
-                android:text="마이"
-                android:textColor="#BDBDBD"
-                android:textSize="11sp" />
-        </LinearLayout>
-    </LinearLayout>
+        android:layout_height="80dp" />
 
 </LinearLayout>
