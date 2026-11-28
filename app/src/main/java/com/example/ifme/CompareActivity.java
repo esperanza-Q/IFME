@@ -88,8 +88,8 @@ public class CompareActivity extends AppCompatActivity {
     private void showTab(int tab) {
         boolean isExpect = (tab == TAB_EXPECT);
 
-        tabExpect.setBackgroundResource(isExpect ? R.drawable.bg_compare_tab_selected : 0);
-        tabParallel.setBackgroundResource(isExpect ? 0 : R.drawable.bg_compare_tab_selected);
+        tabExpect.setBackgroundResource(isExpect ? R.drawable.bg_compare_tab_selected_left : 0);
+        tabParallel.setBackgroundResource(isExpect ? 0 : R.drawable.bg_compare_tab_selected_right);
         tabExpect.setTextColor(isExpect ? 0xFFFFFFFF : 0xFF8F96F2);
         tabParallel.setTextColor(isExpect ? 0xFF8F96F2 : 0xFFFFFFFF);
 
