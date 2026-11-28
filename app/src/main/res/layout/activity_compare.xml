@@ -7,11 +7,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#000000">
+    android:background="#000000"
+    android:paddingTop="20dp">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="84dp">
 
         <ImageButton
             android:id="@+id/compareBtnBack"
@@ -19,21 +20,21 @@
             android:layout_height="48dp"
             android:layout_gravity="start|center_vertical"
             android:layout_marginStart="2dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="뒤로 가기"
             android:padding="16dp"
             android:scaleType="fitCenter"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_back_black"
-            app:tint="#FFFFFF"
-            android:contentDescription="뒤로 가기" />
+            app:tint="#FFFFFF" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/pretendard_semibold"
             android:text="비교하기"
             android:textColor="#FFFFFF"
-            android:textSize="17sp"
-            android:fontFamily="@font/pretendard_semibold" />
+            android:textSize="17sp" />
 
     </FrameLayout>
 
@@ -86,7 +87,7 @@
 
                 <include
                     android:id="@+id/compareCardLeft"
-                    layout="@layout/view_compare_card"
+                    layout="@layout/item_compare_card"
                     android:layout_width="0dp"
                     android:layout_height="330dp"
                     android:layout_weight="1" />
@@ -97,7 +98,7 @@
 
                 <include
                     android:id="@+id/compareCardRight"
-                    layout="@layout/view_compare_card"
+                    layout="@layout/item_compare_card"
                     android:layout_width="0dp"
                     android:layout_height="330dp"
                     android:layout_weight="1" />
@@ -109,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:text="지향 가치 vs 실제 가치"
                 android:textColor="#FFFFFF"
                 android:textSize="19sp"

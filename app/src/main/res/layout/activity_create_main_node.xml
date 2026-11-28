@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_create_main_node"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <!-- 상단 헤더 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingHorizontal="16dp">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="뒤로가기"
+            android:src="@drawable/ic_back_arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/suite_regular"
+            android:text="새 세계 만들기"
+            android:textColor="#1A1A1A"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <!-- 상단 3단계 진행 바 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/progress_step_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="#5363BE" />
+
+        <View
+            android:id="@+id/progress_step_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="#5363BE" />
+
+        <View
+            android:id="@+id/progress_step_3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#E8EAF2" />
+    </LinearLayout>
+
+    <!-- 본문 스크롤 영역 -->
+    <ScrollView
+        android:id="@+id/scroll_main_node"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="28dp">
+
+            <!-- 상단 선택지 안내 카드 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_create_node_card"
+                android:elevation="2dp"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="18dp">
+
+                <TextView
+                    android:id="@+id/tv_choice_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/wavve_pado"
+                    android:text="선택지 1. 취업하기"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/suite_regular"
+                    android:text="이 선택지를 골랐을 때 미래를 예상하여 아래 항목을 작성해주세요"
+                    android:textColor="#222222"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- 1. 중요하게 생각하는 가치 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/wavve_pado"
+                android:text="1. 중요하게 생각하는 가치"
+                android:textColor="#151E43"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/suite_regular"
+                android:text="이 선택지에서 가장 중요하게 생각하는 가치를 골라주세요. (최대 3개)"
+                android:textColor="#1A1A1A"
+                android:textSize="11sp" />
+
+            <!-- 기본 가치 칩 1행 (5개) -->
+            <LinearLayout
+                android:id="@+id/layout_chips_row1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/chip_stability"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_value_chip"
+                    android:fontFamily="@font/suite_regular"
+                    android:gravity="center"
+                    android:text="안정"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/chip_growth"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_value_chip"
+                    android:fontFamily="@font/suite_regular"
+                    android:gravity="center"
+                    android:text="성장"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/chip_expertise"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_value_chip"
+                    android:fontFamily="@font/suite_regular"
+                    android:gravity="center"
+                    android:text="전문성"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/chip_challenge"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_value_chip"
+                    android:fontFamily="@font/suite_regular"
+                    android:gravity="center"
+                    android:text="도전"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/chip_recognition"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_value_chip"
+                    android:fontFamily="@font/suite_regular"
+                    android:gravity="center"
+                    android:text="인정"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 기본 가치 칩 2행 (5개) -->
+            <LinearLayout
+                android:id="@+id/layout_chips_row2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/chip_freedom"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_value_chip"
+                    android:fontFamily="@font/suite_regular"
+                    android:gravity="center"
+                    android:text="자유"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/chip_relationship"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_value_chip"
+                    android:fontFamily="@font/suite_regular"
+                    android:gravity="center"
+                    android:text="관계"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/chip_leisure"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_value_chip"
+                    android:fontFamily="@font/suite_regular"
+                    android:gravity="center"
+                    android:text="여유"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/chip_meaning"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_value_chip"
+                    android:fontFamily="@font/suite_regular"
+                    android:gravity="center"
+                    android:text="의미"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/chip_etc"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_value_chip"
+                    android:fontFamily="@font/suite_regular"
+                    android:gravity="center"
+                    android:text="기타"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 사용자 직접 추가 가치 칩 영역 -->
+            <LinearLayout
+                android:id="@+id/layout_custom_chips_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" />
+
+            <!-- 직접 가치 입력 및 추가 버튼 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_custom_value"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_value_input_pill"
+                    android:fontFamily="@font/suite_regular"
+                    android:gravity="center_vertical"
+                    android:hint="가치를 입력해주세요"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="0dp"
+                    android:textColor="#222222"
+                    android:textColorHint="#C4C4C4"
+                    android:textSize="13sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_add_value"
+                    android:layout_width="59dp"
+                    android:layout_height="31dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_value_add_btn"
+                    android:fontFamily="@font/suite_regular"
+                    android:stateListAnimator="@null"
+                    android:text="추가"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 2. 기대하는 점 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/wavve_pado"
+                android:text="2. 기대하는 점"
+                android:textColor="#151E43"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/suite_regular"
+                android:text="이 선택으로 얻을 것 같은 경험이나 성과를 적어주세요."
+                android:textColor="#1A1A1A"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/et_expect"
+                android:layout_width="match_parent"
+                android:layout_height="102dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_memo_input_box"
+                android:fontFamily="@font/suite_regular"
+                android:gravity="top|start"
+                android:hint="ex) 실무 경험과 포트폴리오를 쌓고, 첫 월급으로 경제적으로 독립하고 싶어요.\n같이 일하는 선배들에게 배우면서 개발자로서 빠르게 성장할 수 있을 것 같아요."
+                android:inputType="textMultiLine"
+                android:lineSpacingExtra="3dp"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="12dp"
+                android:textColor="#222222"
+                android:textColorHint="#808080"
+                android:textSize="13sp" />
+
+            <!-- 3. 걱정되는 점 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/wavve_pado"
+                android:text="3. 걱정되는 점"
+                android:textColor="#151E43"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/suite_regular"
+                android:text="예상되는 문제나 부담되는 점을 적어주세요."
+                android:textColor="#1A1A1A"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/et_worry"
+                android:layout_width="match_parent"
+                android:layout_height="102dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_memo_input_box"
+                android:fontFamily="@font/suite_regular"
+                android:gravity="top|start"
+                android:hint="ex) 첫 직장이 나랑 안 맞으면 어쩌나 걱정돼요. 업무량이 많아서 야근이 잦아지거나, 신입이라 적응하는 동안 스트레스를 많이 받을 것 같아요."
+                android:inputType="textMultiLine"
+                android:lineSpacingExtra="3dp"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="12dp"
+                android:textColor="#222222"
+                android:textColorHint="#808080"
+                android:textSize="13sp" />
+
+            <!-- 4. 포기해야 할 것 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/wavve_pado"
+                android:text="4. 포기해야 할 것"
+                android:textColor="#151E43"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/suite_regular"
+                android:text="이 선택을 하면 놓치거나 감수해야 하는 부분을 적어주세요."
+                android:textColor="#1A1A1A"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/et_give_up"
+                android:layout_width="match_parent"
+                android:layout_height="102dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_memo_input_box"
+                android:fontFamily="@font/suite_regular"
+                android:gravity="top|start"
+                android:hint="ex) 대학원 진학이나 더 깊이 공부할 시간을 포기해야 해요. 방학, 여행, 자유로운 시간처럼 학생일 때만 누릴 수 있는 여유도 줄어들 것 같아요."
+                android:inputType="textMultiLine"
+                android:lineSpacingExtra="3dp"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="12dp"
+                android:textColor="#222222"
+                android:textColorHint="#808080"
+                android:textSize="13sp" />
+
+            <!-- 5. 예상 만족도 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/wavve_pado"
+                android:text="5. 예상 만족도"
+                android:textColor="#151E43"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/suite_regular"
+                android:text="이 선택지를 골랐을 때 예상되는 만족도를 선택해주세요."
+                android:textColor="#1A1A1A"
+                android:textSize="12sp" />
+
+            <!-- 슬라이더 및 Lv. 표시 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <SeekBar
+                    android:id="@+id/seekbar_satisfaction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="9"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:progress="6"
+                    android:progressDrawable="@drawable/seekbar_satisfaction_progress"
+                    android:splitTrack="false"
+                    android:thumb="@drawable/seekbar_satisfaction_thumb" />
+
+                <TextView
+                    android:id="@+id/tv_satisfaction_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/suite_regular"
+                    android:text="Lv.7"
+                    android:textColor="#4460D1"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 하단 CTA 버튼 -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_main_node_next"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/bg_create_cta_btn"
+                android:fontFamily="@font/wavve_pado"
+                android:stateListAnimator="@null"
+                android:text="선택지 2로 넘어가기"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- 하단 네비게이션 바 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp">
+
+        <!-- 월드 탭 (활성화) -->
+        <LinearLayout
+            android:id="@+id/nav_world"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="월드"
+                android:src="@drawable/ic_nav_world"
+                app:tint="#4460D1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="월드"
+                android:textColor="#4460D1"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- 홈 탭 -->
+        <LinearLayout
+            android:id="@+id/nav_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="홈"
+                android:src="@drawable/ic_nav_home"
+                app:tint="#BDBDBD" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="홈"
+                android:textColor="#BDBDBD"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- 마이 탭 -->
+        <LinearLayout
+            android:id="@+id/nav_my"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="마이"
+                android:src="@drawable/ic_nav_my"
+                app:tint="#BDBDBD" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="마이"
+                android:textColor="#BDBDBD"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
