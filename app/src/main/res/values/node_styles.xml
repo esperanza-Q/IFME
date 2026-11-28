@@ -18,7 +18,8 @@
         <item name="android:paddingBottom">3dp</item>
         <item name="android:textColor">#3442C8</item>
         <item name="android:textSize">12sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/suite_bold</item>
+        <item name="fontFamily">@font/suite_bold</item>
     </style>
 
     <!-- 남색 가치 칩 ("안정", "성장" 등) -->
@@ -77,6 +78,8 @@
         <item name="android:gravity">center</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/suite_medium</item>
+        <item name="fontFamily">@font/suite_medium</item>
     </style>
 
     <style name="RetroPastCard">

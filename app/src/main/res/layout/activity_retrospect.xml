@@ -83,7 +83,7 @@
                         android:text="선택 노드 제목"
                         android:textColor="#FFFFFF"
                         android:textSize="26sp"
-                        android:textStyle="bold" />
+                        android:fontFamily="@font/wavve_pado" />
                 </LinearLayout>
             </LinearLayout>
 
