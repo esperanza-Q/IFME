@@ -1,5 +1,6 @@
 package com.example.ifme;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
@@ -13,17 +14,10 @@ import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.IInterface;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
@@ -79,16 +73,16 @@ public class MainActivity extends AppCompatActivity {
         cardCreateWorld.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "새 세계 만들기 화면을 준비 중입니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, CreateWorldActivity.class);
+                startActivity(intent);
             }
+        });
+
         FooterHelper.setup(this, FooterHelper.TAB_HOME);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
     }
-
-
 }
