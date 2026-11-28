@@ -6,14 +6,14 @@
     android:background="#05101D">
 
     <!-- 뒤로가기 -->
-    <TextView
+
+    <ImageView
         android:id="@+id/btnTreeBack"
         android:layout_width="48dp"
         android:layout_height="64dp"
-        android:gravity="center"
-        android:text="‹"
-        android:textColor="#FFFFFF"
-        android:textSize="32sp"
+        android:padding="16dp"
+        android:src="@drawable/ic_node_create_back"
+        android:contentDescription="뒤로가기"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +26,7 @@
         android:text="세계 제목"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/pretendard_semibold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

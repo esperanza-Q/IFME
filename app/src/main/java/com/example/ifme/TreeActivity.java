@@ -6,7 +6,7 @@ import android.content.Intent;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 
-
+import androidx.core.content.res.ResourcesCompat;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -100,6 +100,9 @@ public class TreeActivity extends AppCompatActivity {
 
         findViewById(R.id.btnTreeBack).setOnClickListener(v -> finish());
         TextView worldTitle = findViewById(R.id.tvWorldTitle);
+        worldTitle.setTypeface(
+                ResourcesCompat.getFont(this, R.font.pretendard_semibold)
+        );
         String suppliedWorldTitle = getIntent().getStringExtra("worldTitle");
         worldTitle.setText(suppliedWorldTitle == null ? "세계 제목" : suppliedWorldTitle);
 
@@ -263,7 +266,9 @@ public class TreeActivity extends AppCompatActivity {
             root.setText("me");
             root.setTextColor(Color.WHITE);
             root.setTextSize(18);
-            root.setTypeface(null, Typeface.BOLD);
+            root.setTypeface(
+                    ResourcesCompat.getFont(this, R.font.pretendard_semibold)
+            );
             root.setGravity(Gravity.CENTER);
             root.setBackgroundResource(R.drawable.bg_tree_me);
             setOutlineSelected(root, selectedNode != null);
@@ -281,6 +286,9 @@ public class TreeActivity extends AppCompatActivity {
         int nodeTextColor = Color.parseColor(dimmed ? "#D1D1D1" : "#FFFFFF");
 
         TextView label = new TextView(this);
+        label.setTypeface(
+                ResourcesCompat.getFont(this, R.font.pretendard_semibold)
+        );
         label.setText(node.parent.left == node ? "선택지 1" : "선택지 2");
         label.setTextColor(nodeTextColor);
         label.setTextSize(14);
@@ -290,7 +298,9 @@ public class TreeActivity extends AppCompatActivity {
         title.setText(node.title);
         title.setTextColor(nodeTextColor);
         title.setTextSize(18);
-        title.setTypeface(null, Typeface.BOLD);
+        title.setTypeface(
+                ResourcesCompat.getFont(this, R.font.pretendard_semibold)
+        );
         title.setGravity(Gravity.CENTER);
         title.setMaxLines(2);
 

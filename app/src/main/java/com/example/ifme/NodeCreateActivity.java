@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
@@ -70,6 +71,9 @@ public class NodeCreateActivity extends AppCompatActivity {
                 "자유", "관계", "여유", "의미", "기타"};
         for (String value : choices) {
             TextView chip = new TextView(this);
+            chip.setTypeface(
+                    ResourcesCompat.getFont(this, R.font.suite_semibold)
+            );
             chip.setText(value);
             chip.setTextSize(14);
             chip.setTextColor(Color.WHITE);

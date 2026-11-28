@@ -33,10 +33,11 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="노드 생성"
+            android:fontFamily="@font/pretendard_semibold"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:letterSpacing="-0.025"
-            android:textStyle="bold" />
+            />
 
         <Space
             android:layout_width="56dp"
@@ -72,7 +73,7 @@
                 android:text="취업하기"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/wavvepado_regular"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -80,7 +81,7 @@
                 android:text="STEP 0  선택지 이름"
                 android:textColor="#5D7AFA"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/pretendard_bold" />
 
             <EditText
                 android:id="@+id/etNodeTitle"
@@ -97,7 +98,8 @@
                 android:paddingEnd="16dp"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:fontFamily="@font/pretendard_medium"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -107,7 +109,7 @@
                 android:text="STEP 1  중요하게 생각하는 가치"
                 android:textColor="#5D7AFA"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/pretendard_bold" />
 
             <GridLayout
                 android:id="@+id/gridValues"
@@ -142,7 +144,8 @@
                     android:singleLine="true"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#33FFFFFF"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:fontFamily="@font/pretendard_medium"/>
 
                 <TextView
                     android:id="@+id/btnAddValue"
@@ -155,7 +158,8 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:fontFamily="@font/suite_semibold"/>
             </LinearLayout>
 
             <TextView
@@ -174,7 +178,7 @@
                 android:text="STEP 2  기대하는 점"
                 android:textColor="#5D7AFA"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/pretendard_bold" />
 
             <EditText
                 android:id="@+id/etExpected"
@@ -194,7 +198,8 @@
                 android:paddingBottom="12dp"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:fontFamily="@font/pretendard_medium"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -203,12 +208,13 @@
                 android:text="STEP 3  걱정하는 점"
                 android:textColor="#5D7AFA"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/pretendard_bold" />
 
             <EditText
                 android:id="@+id/etConcern"
                 android:layout_width="match_parent"
-                android:layout_height="117dp"
+                android:layout_height="wrap_content"
+                android:minHeight="117dp"
                 android:layout_marginTop="19dp"
                 android:background="@drawable/bg_node_create_input"
                 android:gravity="top|start"
@@ -222,7 +228,8 @@
                 android:paddingBottom="12dp"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:fontFamily="@font/pretendard_medium"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -231,7 +238,7 @@
                 android:text="STEP 4  예상 만족도"
                 android:textColor="#5D7AFA"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/pretendard_bold" />
 
             <com.example.ifme.SatisfactionSliderView
                 android:id="@+id/satisfactionSlider"
@@ -265,6 +272,7 @@
             android:text="완료"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/pretendard_bold"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

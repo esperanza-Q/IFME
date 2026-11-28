@@ -8,6 +8,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import androidx.core.content.res.ResourcesCompat;
 
 /** Figma 형태의 만족도 바. 원형 핸들과 레벨 텍스트가 함께 움직임. */
 public class SatisfactionSliderView extends View {
@@ -34,6 +35,9 @@ public class SatisfactionSliderView extends View {
         thumbPaint.setColor(Color.parseColor("#5D7AFA"));
         labelPaint.setColor(Color.parseColor("#5D7AFA"));
         labelPaint.setTextSize(sp(14));
+        labelPaint.setTypeface(
+                ResourcesCompat.getFont(getContext(), R.font.pretendard_semibold)
+        );
         labelPaint.setFakeBoldText(true);
         labelPaint.setTextAlign(Paint.Align.CENTER);
         setClickable(true);
