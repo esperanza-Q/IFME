@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +39,9 @@ public class CreateWorldActivity extends AppCompatActivity {
         initViews();
         setupPeriodSpinner();
         setupListeners();
+
+        // 공통 하단 네비게이션 바 (월드 탭 활성화)
+        FooterHelper.setup(this, FooterHelper.TAB_WORLD);
     }
 
     private void setupSystemBars() {
@@ -50,7 +52,7 @@ public class CreateWorldActivity extends AppCompatActivity {
         View rootLayout = findViewById(R.id.root_create_world);
         ViewCompat.setOnApplyWindowInsetsListener(rootLayout, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
     }
@@ -112,19 +114,6 @@ public class CreateWorldActivity extends AppCompatActivity {
 
         Button btnNextMainNode = findViewById(R.id.btn_next_main_node);
         btnNextMainNode.setOnClickListener(v -> validateAndMoveNext());
-
-        LinearLayout navHome = findViewById(R.id.nav_home);
-        navHome.setOnClickListener(v -> {
-            Intent intent = new Intent(CreateWorldActivity.this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-            finish();
-        });
-
-        LinearLayout navMy = findViewById(R.id.nav_my);
-        navMy.setOnClickListener(v ->
-                Toast.makeText(CreateWorldActivity.this, "마이 화면은 준비 중입니다.", Toast.LENGTH_SHORT).show()
-        );
     }
 
     private void validateAndMoveNext() {
