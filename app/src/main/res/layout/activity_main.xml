@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical">
 
 <!--    홈 하실 때 여기다가 추가해서 작업하시면 됩니다! 아니면 충돌났을 때, 본인 거 맨 아래에 이 아래 코드들만 추가하시면 되어요!!  -->
 
