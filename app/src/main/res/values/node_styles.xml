@@ -34,7 +34,8 @@
         <item name="android:paddingBottom">4dp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">12sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/suite_bold</item>
+        <item name="fontFamily">@font/suite_bold</item>
     </style>
 
     <!-- 라벨 아래 내용 글씨 -->
