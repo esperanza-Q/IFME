@@ -23,6 +23,12 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        <activity android:name=".NodeSelectActivity" android:exported="false" />
+
+
+        <activity android:name=".MypageActivity" android:exported="false" />
+        <activity android:name=".ReportActivity" android:exported="false" />
+        <activity android:name=".CompareActivity" android:exported="false" />
     </application>
 
 </manifest>
