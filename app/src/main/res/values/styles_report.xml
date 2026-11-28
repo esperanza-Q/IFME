@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 의사결정 리포트 화면에서 반복되는 카드, 글자 스타일 -->
+<resources>
+
+    <!-- 가로 전체를 차지하는 카드: 위 요소와 23dp 간격 -->
+    <style name="ReportCard">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginTop">23dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
+    </style>
+
+    <!-- 가로로 두 장 나란히 놓는 작은 카드: 1:1로 너비를 나눔 -->
+    <style name="ReportSmallCard">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">18dp</item>
+    </style>
+
+    <!-- 카드 제목 -->
+    <style name="ReportCardTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+    </style>
+
+</resources>
