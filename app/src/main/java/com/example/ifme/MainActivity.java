@@ -84,5 +84,16 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        Button compareBtn = (Button) findViewById(R.id.compareBtn);
+        compareBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CompareActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
+
+
 }
