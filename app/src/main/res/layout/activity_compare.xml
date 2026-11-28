@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/compareRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:paddingTop="20dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="84dp">
+
+        <ImageButton
+            android:id="@+id/compareBtnBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="2dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="뒤로 가기"
+            android:padding="16dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_back_black"
+            app:tint="#FFFFFF" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="비교하기"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp" />
+
+    </FrameLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="26dp"
+            android:paddingBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_compare_tab_container">
+
+                <TextView
+                    android:id="@+id/compareTabExpect"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="예상 vs 현실"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/pretendard_semibold" />
+
+                <TextView
+                    android:id="@+id/compareTabParallel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="현실 vs 평행세계"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/pretendard_semibold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <include
+                    android:id="@+id/compareCardLeft"
+                    layout="@layout/item_compare_card"
+                    android:layout_width="0dp"
+                    android:layout_height="330dp"
+                    android:layout_weight="1" />
+
+                <View
+                    android:layout_width="15dp"
+                    android:layout_height="0dp" />
+
+                <include
+                    android:id="@+id/compareCardRight"
+                    layout="@layout/item_compare_card"
+                    android:layout_width="0dp"
+                    android:layout_height="330dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/compareVennTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:text="지향 가치 vs 실제 가치"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:fontFamily="@font/pretendard_bold" />
+
+            <FrameLayout
+                android:layout_width="315dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/img_compare_venn">
+
+                <TextView
+                    android:id="@+id/compareVennLeftOnly"
+                    style="@style/CompareVennText"
+                    android:layout_width="81dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:paddingStart="6dp"
+                    tools:text="전문성" />
+
+                <TextView
+                    android:id="@+id/compareVennBoth"
+                    style="@style/CompareVennText"
+                    android:layout_width="153dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginStart="81dp"
+                    tools:text="안정성\n도전" />
+
+                <TextView
+                    android:id="@+id/compareVennRightOnly"
+                    style="@style/CompareVennText"
+                    android:layout_width="81dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:paddingEnd="6dp" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/bg_compare_legend_left" />
+
+                <TextView
+                    android:id="@+id/compareLegendLeft"
+                    style="@style/CompareLegendText"
+                    android:text="지향 가치" />
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="28dp"
+                    android:background="@drawable/bg_compare_legend_right" />
+
+                <TextView
+                    android:id="@+id/compareLegendRight"
+                    style="@style/CompareLegendText"
+                    android:text="실제로 얻은 가치" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/compareBtnBackToTree"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="26dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_compare_button"
+        app:backgroundTint="@null"
+        android:text="트리로 돌아가기"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:fontFamily="@font/pretendard_bold" />
+
+</LinearLayout>

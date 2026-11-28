@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="330dp"
+    android:orientation="vertical"
+    android:background="@drawable/img_compare_card"
+    android:paddingHorizontal="8dp"
+    android:paddingTop="14dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/compareCardNodeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:fontFamily="@font/pretendard_medium"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:text="취업하기" />
+
+    <TextView
+        android:id="@+id/compareCardType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="2dp"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:fontFamily="@font/pretendard_bold"
+        tools:text="예상" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/img_compare_card_blur"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="19dp"
+        android:paddingBottom="19dp">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_compare_expect"
+            android:contentDescription="기대하는 점" />
+
+        <LinearLayout
+            android:id="@+id/compareCardExpectList"
+            android:layout_width="match_parent"
+            android:layout_height="74dp"
+            android:layout_marginVertical="2dp"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/ic_compare_concern"
+            android:contentDescription="걱정하는 점" />
+
+        <LinearLayout
+            android:id="@+id/compareCardConcernList"
+            android:layout_width="match_parent"
+            android:layout_height="74dp"
+            android:layout_marginVertical="2dp"
+            android:orientation="vertical" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_compare_satisfaction"
+                android:contentDescription="만족도" />
+
+            <TextView
+                android:id="@+id/compareCardSatisfaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:fontFamily="@font/suite_medium"
+                tools:text="만족도 7/10" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
